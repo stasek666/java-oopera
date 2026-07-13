@@ -1,5 +1,10 @@
 public class Director extends  Person{
-    private int numberOfShows; //количество поставленных спектаклей
+    protected int numberOfShows; //количество поставленных спектаклей
+
+    Director (String name, String surname, Gender gender, int numberOfShows) {
+        super(name, surname, gender);
+        this.numberOfShows = numberOfShows;
+    }
 
     Director (Person person, int numberOfShows) {
         super(person.getName(), person.getSurname(), person.getGender());

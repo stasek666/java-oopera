@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Show {
-    private String title;
-    private int duration; // длительность в минутах
-    private Director director;
-    private ArrayList<Actor> listOfActors;
+    protected String title;
+    protected int duration; // длительность в минутах
+    protected Director director;
+    protected ArrayList<Actor> listOfActors;
 
     public Show(String title, int duration, Director director, ArrayList<Actor> listOfActors) {
         this.title = title;
@@ -46,7 +46,7 @@ public class Show {
     }
 
     public void printDirector() {
-        System.out.println("Режисёр спектакля '" + title + "' - " + this.director);
+        System.out.println("Режисёр спектакля '" + title + "' - " + this.director.toString());
     }
 
     public void printListOfActors() {
@@ -61,17 +61,21 @@ public class Show {
             System.out.println("Такой актёр " + actor + " уже есть в списке актёров спектакля '" + title + "'!");
         } else {
             listOfActors.add(actor);
-            // System.out.println("Актёр " + actor + " добавлен");
         }
     }
 
-    public void replaceActor (Actor oldActor, Actor newActor) {
-        if (listOfActors.contains(oldActor)) {
-            listOfActors.remove(oldActor);
-            listOfActors.add(newActor);
-            // System.out.println("Актёр " + oldActor + " заменён на " + newActor);
-        } else {
-            System.out.println("Актёра " + oldActor + " нет в списке актёров спектакля '" + title + "'!");
+    public void replaceActor (Actor newActor, String oldActorSurname) {
+        boolean actorNotFound = true;
+        for (Actor actor : listOfActors) {
+            if (actor.getSurname().equals(oldActorSurname)) {
+                listOfActors.remove(actor);
+                listOfActors.add(newActor);
+                actorNotFound = false;
+                break;
+            }
+        }
+        if (actorNotFound) {
+            System.out.println("Актёра с фамилией " + oldActorSurname + " нет в списке актёров спектакля '" + title + "'!");
         }
     }
 }
